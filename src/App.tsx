@@ -1,18 +1,17 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from './components/Layout';
+import { GlobalProvider } from './context';
+import { Home } from './pages/Home';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalProvider>
+      <Routes>
+        <Route path="/" element={<Layout children={<Home />} />} />
+      </Routes>
+    </GlobalProvider>
   );
-}
+};
 
 export default App;

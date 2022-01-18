@@ -1,5 +1,5 @@
 {
-  "extends": ["react-app", "plugin:@typescript-eslint/eslint-recommended", "plugin:prettier/recommended"],
+  "extends": ["react-app", "plugin:@typescript-eslint/eslint-recommended"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["prettier", "import", "simple-import-sort", "@typescript-eslint"],
   "env": {
