@@ -6,19 +6,24 @@ export default function useLastEpisodes(): void {
   const { lastEpisodes, setLastEpisodes } = useContext(GlobalContext);
 
   useEffect(() => {
-    let mounted: boolean = true;
+    const abortController = new AbortController();
 
-    async function fetchData(): Promise<void> {
-      const { data } = await axios.get(`${process.env.REACT_APP_API}lastEpisodes`);
-      if (mounted) {
+    async function fetchLastEpisodes(): Promise<void> {
+      const { data } = await axios.get(`${process.env.REACT_APP_API}lastEpisodes`, {
+        signal: abortController.signal,
+      });
+
+      if (!abortController.signal.aborted) {
         setLastEpisodes(data.lastEpisodes);
       }
     }
 
-    fetchData();
+    if (lastEpisodes.length === 0) {
+      fetchLastEpisodes();
+    }
 
     return () => {
-      mounted = false;
+      abortController.abort();
     };
-  }, [lastEpisodes]);
+  }, [lastEpisodes, setLastEpisodes]);
 }

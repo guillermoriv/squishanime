@@ -6,7 +6,7 @@ export const Layout: React.FC = ({ children }: { children?: React.ReactNode }) =
   useLastEpisodes();
 
   return (
-    <div>
+    <div className="bg-slate-600 ">
       <Navbar />
       <div>{children}</div>
     </div>
