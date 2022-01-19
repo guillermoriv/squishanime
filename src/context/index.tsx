@@ -1,7 +1,14 @@
 import React, { createContext, useContext, useState } from 'react';
+import { AppState, LastEpisode } from '../interfaces';
 
-const GlobalContext = createContext({});
+const initialState: AppState = {
+  lastEpisodes: [],
+  setLastEpisodes: (value: LastEpisode[]) => {},
+};
+
+export const GlobalContext = createContext<AppState>(initialState);
 
 export const GlobalProvider = ({ children }: { children?: React.ReactChild | React.ReactChild[] }) => {
-  return <GlobalContext.Provider value={{}}>{children}</GlobalContext.Provider>;
+  const [lastEpisodes, setLastEpisodes] = useState<LastEpisode[]>(initialState.lastEpisodes);
+  return <GlobalContext.Provider value={{ lastEpisodes, setLastEpisodes }}>{children}</GlobalContext.Provider>;
 };
