@@ -2,7 +2,6 @@ export interface LastEpisode {
   id: string;
   title: string;
   episode: string;
-  servers: { url: string; name: string }[];
   image: string | null;
 }
 
