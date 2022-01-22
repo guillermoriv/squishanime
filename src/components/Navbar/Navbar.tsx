@@ -14,6 +14,7 @@ export const Navbar: React.FC = () => {
   const [resultSearch, setResultSearch] = useState<Search[]>([]);
   const [canShow, setCanShow] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [timer, setTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   const ref: MutableRefObject<null | any> = useRef(null);
 
@@ -32,6 +33,7 @@ export const Navbar: React.FC = () => {
 
   async function handleChange(e: SyntheticEvent): Promise<void> {
     e.preventDefault();
+    setError(false);
     setResultSearch([]);
     const searchValue: string = (e.target as any).value;
     clearTimeout(timer!);
@@ -40,9 +42,16 @@ export const Navbar: React.FC = () => {
       setCanShow(true);
       setIsLoading(true);
       const newTimer = setTimeout(async () => {
-        const { data } = await axios.get(`${process.env.REACT_APP_API}search/${searchValue}`);
-        setResultSearch(data.search);
-        setIsLoading(false);
+        try {
+          const { data } = await axios.get(`${process.env.REACT_APP_API}search/${searchValue}`);
+
+          setResultSearch(data.search);
+          setIsLoading(false);
+        } catch (e) {
+          console.error(e);
+          setIsLoading(false);
+          setError(true);
+        }
       }, 700);
 
       setTimer(newTimer);
@@ -61,7 +70,11 @@ export const Navbar: React.FC = () => {
                 type="text"
                 placeholder="Buscar..."
                 name="anime"
-                onFocus={() => setCanShow(true)}
+                onFocus={() => {
+                  if (resultSearch.length > 0 || error) {
+                    setCanShow(true);
+                  }
+                }}
                 onChange={handleChange}
                 className="rounded-md p-2 outline-none focus:border-2 focus:border-blue-400 text-black w-80"
               />
@@ -76,21 +89,29 @@ export const Navbar: React.FC = () => {
             >
               {resultSearch.map((item: Search, index: number) => {
                 return (
-                  <li className="mb-2">
+                  <li className="mb-2" key={index}>
                     <Link to={`../anime/${item.id}`} className="flex justify-between">
                       <div className="flex flex-col w-52">
                         <span>{item.title}</span>
                         {item.type.toLowerCase() === 'anime' ? (
-                          <span className="bg-green-500 p-1 rounded-lg w-16 text-center">{item.type}</span>
+                          <span className="bg-green-500 text-xs p-1 rounded-lg w-16 text-center">{item.type}</span>
                         ) : (
-                          <span className="bg-pink-600 p-1 rounded-lg w-16 text-center">{item.type}</span>
+                          <span className="bg-pink-600 text-xs p-1 rounded-lg w-16 text-center">{item.type}</span>
                         )}
                       </div>
-                      <img src={item.image} className="rounded-lg h-24" />
+                      <img
+                        src={
+                          item.image !== null
+                            ? item.image
+                            : 'https://storage.googleapis.com/squishanime_api/images/not_found.jpg'
+                        }
+                        className="rounded-lg h-14 shadow-lg"
+                      />
                     </Link>
                   </li>
                 );
               })}
+              {error && <li>No fueron encontrado resultados...</li>}
             </ul>
           ) : (
             <ul

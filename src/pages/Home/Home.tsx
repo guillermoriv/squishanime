@@ -9,7 +9,7 @@ export const Home: React.FC = () => {
   const { lastEpisodes, loadingLastEpisodes } = useContext(GlobalContext);
 
   return (
-    <div>
+    <div className="h-full">
       <div className="text-3xl flex items-center text-white py-2 px-4">
         <RiAncientGateFill className="mr-3" /> Ultimos episodios:
       </div>
@@ -40,7 +40,7 @@ export const Home: React.FC = () => {
           })}
         </div>
       ) : (
-        <div className="flex justify-center items-center text-white p-2">
+        <div className="flex justify-center items-center text-white p-2 h-full">
           <Triangle color="#FFFFFF" height={80} width={80} />
         </div>
       )}

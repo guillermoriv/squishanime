@@ -5,7 +5,7 @@ import { HiCalendar } from 'react-icons/hi';
 
 export const SideMenu: React.FC = () => {
   return (
-    <div className="bg-slate-800 relative text-white shadow-lg h-full">
+    <div className="bg-slate-800 relative hidden md:block text-white shadow-lg h-full">
       <div className="text-3xl flex items-center justify-center h-20 font-bold">
         <Link to="/">SquishAnime</Link>
       </div>

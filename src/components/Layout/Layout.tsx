@@ -11,7 +11,7 @@ export const Layout: React.FC = ({ children }: { children?: React.ReactNode }) =
       <div className="absolute w-72 h-full">
         <SideMenu />
       </div>
-      <div className="relative ml-72 h-full overflow-auto">
+      <div className="relative md:ml-72 h-full overflow-auto">
         <Navbar />
         {children}
       </div>
