@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { SyntheticEvent, useState } from 'react';
+import React, { MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { Triangle } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +15,20 @@ export const Navbar: React.FC = () => {
   const [canShow, setCanShow] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [timer, setTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+  const ref: MutableRefObject<null | any> = useRef(null);
+
+  function handleClickOutside(event: Event) {
+    if (!ref.current.contains(event.target)) {
+      setCanShow(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [canShow]);
 
   async function handleChange(e: SyntheticEvent): Promise<void> {
     e.preventDefault();
@@ -41,7 +55,7 @@ export const Navbar: React.FC = () => {
     <div className="bg-slate-800 text-white px-3 py-8 shadow-lg">
       <div className="flex w-full">
         <div className="ml-auto relative">
-          <form>
+          <form onSubmit={(e) => e.preventDefault()}>
             <div className="p-2">
               <input
                 type="text"
@@ -52,35 +66,43 @@ export const Navbar: React.FC = () => {
               />
             </div>
           </form>
-          {canShow ? (
-            !isLoading ? (
-              <ul className="absolute bg-zinc-600 p-4 z-10 h-52 w-80 rounded-md overflow-auto top-13 right-2">
-                {resultSearch.map((item: Search, index: number) => {
-                  return (
-                    <li className="mb-2">
-                      <Link to={`../anime/${item.id}`} className="flex justify-between">
-                        <div className="flex flex-col w-52">
-                          <span>{item.title}</span>
-                          {item.type.toLowerCase() === 'anime' ? (
-                            <span className="bg-green-500 p-1 rounded-lg w-16 text-center">{item.type}</span>
-                          ) : (
-                            <span className="bg-pink-600 p-1 rounded-lg w-16 text-center">{item.type}</span>
-                          )}
-                        </div>
-                        <img src={item.image} className="rounded-lg h-24" />
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : (
-              <ul className="absolute bg-zinc-600 p-4 z-10 w-80 rounded-md overflow-auto top-13 right-2">
-                <li className="flex justify-center">
-                  <Triangle color="#FFFFFF" height={80} width={80} />
-                </li>
-              </ul>
-            )
-          ) : null}
+          {!isLoading ? (
+            <ul
+              ref={ref}
+              className={`absolute bg-zinc-600 p-4 z-10 h-52 w-80 ${
+                canShow ? 'block' : 'hidden'
+              } rounded-md overflow-auto top-13 right-2`}
+            >
+              {resultSearch.map((item: Search, index: number) => {
+                return (
+                  <li className="mb-2">
+                    <Link to={`../anime/${item.id}`} className="flex justify-between">
+                      <div className="flex flex-col w-52">
+                        <span>{item.title}</span>
+                        {item.type.toLowerCase() === 'anime' ? (
+                          <span className="bg-green-500 p-1 rounded-lg w-16 text-center">{item.type}</span>
+                        ) : (
+                          <span className="bg-pink-600 p-1 rounded-lg w-16 text-center">{item.type}</span>
+                        )}
+                      </div>
+                      <img src={item.image} className="rounded-lg h-24" />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <ul
+              ref={ref}
+              className={`absolute bg-zinc-600 p-4 z-10 ${
+                canShow ? 'block' : 'hidden'
+              } w-80 rounded-md overflow-auto top-13 right-2`}
+            >
+              <li className="flex justify-center">
+                <Triangle color="#FFFFFF" height={80} width={80} />
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </div>
