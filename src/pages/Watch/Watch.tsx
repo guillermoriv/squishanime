@@ -16,7 +16,7 @@ export const Watch: React.FC = () => {
   }, [serverList.defaultServerUrl]);
 
   return (
-    <div className="p-6 flex flex-col items-center justify-between w-1/2 m-auto">
+    <div className="p-6 flex flex-col items-center justify-between">
       <div className="text-white text-3xl">
         {information.title} - {getEpisodeNumber(id)}
       </div>
