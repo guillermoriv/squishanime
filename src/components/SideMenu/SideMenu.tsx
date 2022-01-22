@@ -35,7 +35,7 @@ export const SideMenu: React.FC = () => {
         </ul>
       </div>
       <div className="bottom-0 text-justify p-4 absolute text-sm">
-        <div>SquishAnime © 2020 Todos los derechos reservados</div>
+        <div>SquishAnime © 2022 Todos los derechos reservados</div>
         <div>
           Ningun video se encuentra alojado en nuestros servidores. Todos los vídeos que ves en nuestra plataforma son
           tomados de internet, de sitios webs gratuitos.
