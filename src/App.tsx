@@ -4,6 +4,7 @@ import { Layout } from './components/Layout';
 import { GlobalProvider } from './context';
 import { Home } from './pages/Home';
 import { Watch } from './pages/Watch';
+import 'tw-elements';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { Anime } from './pages/Anime';
 

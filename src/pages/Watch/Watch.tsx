@@ -17,9 +17,9 @@ export const Watch: React.FC = () => {
 
   return (
     <div className="p-6 flex flex-col items-center justify-between">
-      <div className="text-white text-3xl">
+      <h4 className="text-4xl font-medium leading-tight mt-0 mb-2 text-white">
         {information.title} - {getEpisodeNumber(id)}
-      </div>
+      </h4>
       <div className="flex justify-start w-full">
         <ul className="flex text-white my-2">
           {serverList.servers.map((item: { url: string; name: string }, index: number) => {
