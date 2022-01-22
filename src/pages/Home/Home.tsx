@@ -22,7 +22,11 @@ export const Home: React.FC = () => {
               <Link key={index} className="mb-2 mx-1 p-2" to={`/ver/${id}-${episode}`}>
                 <div className="relative m-2 h-52 w-60 shadow-xl text-white">
                   <img
-                    src={item.image !== null ? item.image : ''}
+                    src={
+                      item.image !== null
+                        ? item.image
+                        : 'https://storage.googleapis.com/squishanime_api/images/not_found.jpg'
+                    }
                     className="h-full rounded-lg w-full"
                     alt="Anime Image"
                   />

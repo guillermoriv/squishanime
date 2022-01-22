@@ -28,7 +28,7 @@ export const Navbar: React.FC = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [canShow]);
+  }, [ref]);
 
   async function handleChange(e: SyntheticEvent): Promise<void> {
     e.preventDefault();
@@ -61,6 +61,7 @@ export const Navbar: React.FC = () => {
                 type="text"
                 placeholder="Buscar..."
                 name="anime"
+                onFocus={() => setCanShow(true)}
                 onChange={handleChange}
                 className="rounded-md p-2 outline-none focus:border-2 focus:border-blue-400 text-black w-80"
               />
