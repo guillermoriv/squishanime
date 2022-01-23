@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Triangle } from 'react-loader-spinner';
 import { Link, useParams } from 'react-router-dom';
+import { BsCardList } from 'react-icons/bs';
 import useEpisodes, { EpisodeList } from '../../hooks/useEpisodes';
 import useMoreInfo from '../../hooks/useMoreInfo';
 
@@ -31,12 +32,25 @@ export const Anime: React.FC = () => {
   return (
     <>
       {!isLoading ? (
-        <div className="text-white flex flex-col p-2">
-          <div className="flex">
-            <img src={information.poster} alt={information.title} className="rounded-md h-80 shadow-lg" />
-            <div className="flex-grow ml-3">
+        <div className="text-white flex flex-col h-full p-2">
+          <div className="flex flex-col lg:flex-row">
+            <div className="flex-shrink-0">
+              <img src={information.poster} alt={information.title} className="rounded-md w-full shadow-lg" />
+              <div className="text-center">
+                {information.status === 'Finalizado' ? (
+                  <span className="inline-block w-full px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded-bl rounded-br shadow-md">
+                    {information.status}
+                  </span>
+                ) : (
+                  <span className="inline-block w-full px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded-bl rounded-br shadow-md">
+                    {information.status}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="ml-3 flex-grow">
               <div className="text-3xl font-bold">{information.title}</div>
-              <p>{information.synopsis}</p>
+              <p className="my-5">{information.synopsis}</p>
               <ul className="flex mt-3">
                 {information.genres.map((item: string, index: number) => {
                   return (
@@ -68,7 +82,12 @@ export const Anime: React.FC = () => {
               </div>
             </div>
           </div>
-          <ul className="ml-60 h-72 overflow-auto">{RenderAnime(filter)}</ul>
+          <div className="mt-11 flex-grow min-h-full p-5 bg-slate-700 rounded-lg overflow-auto">
+            <span className="flex items-center mb-4 text-xl">
+              <BsCardList className="mr-4" size={45} /> Episodios:
+            </span>
+            <ul>{RenderAnime(filter)}</ul>
+          </div>
         </div>
       ) : (
         <div className="text-white flex justify-center items-center h-full">

@@ -82,7 +82,15 @@ export const CardDirectory: React.FC<{ item: Anime }> = ({ item }: { item: Anime
               )}
             </>
           ) : (
-            <p className="text-gray-600 text-xs font-bold">Cargando...</p>
+            <div className="text-gray-600 text-xs font-bold flex items-center">
+              Cargando...
+              <div
+                className="ml-2 spinner-border animate-spin inline-block w-5 h-5 border-4 rounded-full text-blue-300"
+                role="status"
+              >
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
           )}
         </div>
       </div>
