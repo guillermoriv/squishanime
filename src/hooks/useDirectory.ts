@@ -13,18 +13,21 @@ export interface Anime {
   description: string;
 }
 
-export default function useDirectory(page: string): Anime[] {
+export default function useDirectory(page: string): { directory: Anime[]; loading: boolean } {
   const [directory, setDirectory] = useState<Anime[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   console.log(page);
   useEffect(() => {
     async function fetchDirectory() {
+      setIsLoading(true);
       const { data } = await axios.get(`${process.env.REACT_APP_API}allDirectory?page=${page}`);
       setDirectory(data.animes);
+      setIsLoading(false);
     }
 
     fetchDirectory();
   }, [page]);
 
-  return directory;
+  return { directory, loading: isLoading };
 }
