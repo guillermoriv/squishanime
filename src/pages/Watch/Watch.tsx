@@ -106,7 +106,7 @@ export const Watch: React.FC = () => {
         {information.title} - {getEpisodeNumber(id)}
       </h4>
       <div className="flex justify-start items-center w-full my-2">
-        <div className="inline-flex" role="group">
+        <div className="inline-flex overflow-auto" role="group">
           {RenderServers()}
         </div>
       </div>

@@ -32,7 +32,7 @@ export const Anime: React.FC = () => {
   return (
     <>
       {!isLoading ? (
-        <div className="text-white flex flex-col h-full p-2">
+        <div className="text-white flex flex-col p-2">
           <div className="flex flex-col lg:flex-row">
             <div className="flex-shrink-0">
               <img src={information.poster} alt={information.title} className="rounded-md w-full shadow-lg" />
@@ -60,32 +60,35 @@ export const Anime: React.FC = () => {
                   );
                 })}
               </ul>
-              <div className="flex items-center my-2 justify-between">
-                <div className="flex justify-center">
-                  <div className="form-check form-switch">
-                    <input
-                      className="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm"
-                      type="checkbox"
-                      role="switch"
-                      onChange={() => setFilter(!filter)}
-                      id="flexSwitchCheckChecked"
-                    />
-                    <label className="form-check-label inline-block text-white" htmlFor="flexSwitchCheckChecked">
-                      {filter && <span>Ordenar de mayor a menor</span>}
-                      {!filter && <span>Ordenar de menor a mayor</span>}
-                    </label>
-                  </div>
-                </div>
+              <div className="my-2">
                 <div className="bg-slate-800 p-2 rounded-md text-center font-bold w-32">
                   Score: {information.rating}
                 </div>
               </div>
             </div>
           </div>
-          <div className="mt-11 flex-grow min-h-full p-5 bg-slate-700 rounded-lg overflow-auto">
-            <span className="flex items-center mb-4 text-xl">
-              <BsCardList className="mr-4" size={45} /> Episodios:
-            </span>
+          <div className="my-10 h-80 p-5 bg-slate-700 rounded-lg overflow-auto">
+            <div className="flex items-center justify-between">
+              <span className="flex items-center mb-4 text-xl">
+                <BsCardList className="mr-4" size={45} /> Episodios:
+              </span>
+              <div className="flex justify-center">
+                <div className="form-check form-switch">
+                  <input
+                    className="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm"
+                    type="checkbox"
+                    role="switch"
+                    onChange={() => setFilter(!filter)}
+                    id="flexSwitchCheckChecked"
+                  />
+                  <label className="form-check-label inline-block text-white" htmlFor="flexSwitchCheckChecked">
+                    {filter && <span>Ordenar de mayor a menor</span>}
+                    {!filter && <span>Ordenar de menor a mayor</span>}
+                  </label>
+                </div>
+              </div>
+            </div>
+
             <ul>{RenderAnime(filter)}</ul>
           </div>
         </div>

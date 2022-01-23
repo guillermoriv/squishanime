@@ -20,8 +20,8 @@ export const Home: React.FC = () => {
             const { title, episode, id } = item;
 
             return (
-              <div className="flex justify-center p-2 transition-all hover:shadow-2xl hover:-translate-y-5" key={index}>
-                <div className="rounded-lg shadow-xl bg-white w-full">
+              <div className="flex justify-center p-2" key={index}>
+                <div className="rounded-lg shadow-xl transition-all bg-white w-full hover:shadow-2xl hover:-translate-y-5">
                   <Link key={index} to={`/anime/${id}`}>
                     <div className="relative">
                       <img

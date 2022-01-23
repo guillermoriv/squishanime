@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { Triangle } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
+import { FiDelete } from 'react-icons/fi';
 
 interface Search {
   id: string;
@@ -151,47 +152,60 @@ export const Navbar: React.FC = () => {
               </Link>
             </li>
           </ul>
-          <div className="relative flex sm:justify-end w-full">
-            <form onSubmit={(e) => e.preventDefault()}>
-              <div className="flex justify-center">
-                <div className="mb-3 xl:w-96">
+          <div className="relative flex w-full">
+            <form onSubmit={(e) => e.preventDefault()} className="w-full">
+              <div className="flex justify-end">
+                <div className="mb-3 w-96 flex-grow lg:flex-grow-0 ">
                   <label htmlFor="search-input" className="form-label hidden">
                     Text input
                   </label>
-                  <input
-                    type="text"
-                    onFocus={() => {
-                      if (resultSearch.length > 0 || error) {
-                        setCanShow(true);
-                      }
-                    }}
-                    onChange={handleChange}
-                    className="
-                      form-control
-                      block
-                      w-full
-                      px-3
-                      py-3
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                    "
-                    id="search-input"
-                    placeholder="Buscar..."
-                  />
+                  <div className="relative w-full">
+                    <input
+                      type="text"
+                      onFocus={() => {
+                        if (resultSearch.length > 0 || error) {
+                          setCanShow(true);
+                        }
+                      }}
+                      onChange={handleChange}
+                      className="
+                        form-control
+                        block
+                        w-full
+                        px-3
+                        py-3
+                        text-base
+                        font-normal
+                        text-gray-700
+                        bg-white bg-clip-padding
+                        border border-solid border-gray-300
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                      "
+                      id="search-input"
+                      placeholder="Buscar..."
+                    />
+                    <FiDelete
+                      className="block absolute top-3 right-4 cursor-pointer"
+                      size={25}
+                      onClick={() => {
+                        const search = document.getElementById('search-input');
+                        (search as any).value = '';
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </form>
             {!isLoading ? (
-              <div ref={ref} className={`${canShow ? 'flex' : 'hidden'} justify-center absolute w-96 top-16 z-10`}>
-                <ul className="rounded-lg border bg-white w-96 text-gray-900 h-52 overflow-auto">
+              <div
+                ref={ref}
+                className={`${canShow ? 'flex' : 'hidden'} justify-end w-full absolute right-0 top-16 z-10`}
+              >
+                <ul className="rounded-lg border bg-white w-96 flex-grow lg:flex-grow-0 text-gray-900 h-52 overflow-auto">
                   {resultSearch.map((item: Search, index: number) => {
                     return (
                       <li className="px-6 py-2 border-b border-gray-200 w-full" key={index}>
@@ -228,11 +242,9 @@ export const Navbar: React.FC = () => {
             ) : (
               <div
                 ref={ref}
-                className={`absolute bg-white p-4 z-10 ${
-                  canShow ? 'block' : 'hidden'
-                } w-96 rounded-md overflow-auto top-14`}
+                className={`${canShow ? 'flex' : 'hidden'} justify-end w-full absolute right-0 top-16 z-10`}
               >
-                <div className="flex justify-center">
+                <div className="rounded-lg border flex justify-center items-center bg-white w-96 flex-grow lg:flex-grow-0 text-gray-900 h-28">
                   <Triangle color="#000000" height={80} width={80} />
                 </div>
               </div>
