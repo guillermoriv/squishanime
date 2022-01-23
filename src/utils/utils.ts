@@ -28,7 +28,7 @@ export function getAnimeLink(id: string | undefined): string {
   return newId.join('-');
 }
 
-const range = (from: number, to: number, step: number = 1) => {
+export const range = (from: number, to: number, step: number = 1) => {
   let i = from;
   const range = [];
 

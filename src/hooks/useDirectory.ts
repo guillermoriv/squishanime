@@ -17,7 +17,6 @@ export default function useDirectory(page: string): { directory: Anime[]; loadin
   const [directory, setDirectory] = useState<Anime[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  console.log(page);
   useEffect(() => {
     async function fetchDirectory() {
       setIsLoading(true);
