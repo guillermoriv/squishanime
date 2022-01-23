@@ -1,9 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { HiCalendar } from 'react-icons/hi';
 
 export const SideMenu: React.FC = () => {
+  const [active, setActive] = useState<string>('');
+  const location = useLocation();
+
+  useEffect(() => {
+    setActive(location.pathname.split('/')[1]);
+  }, [location]);
+
   return (
     <div
       className="
@@ -30,16 +37,24 @@ export const SideMenu: React.FC = () => {
       <div className="flex flex-col justify-between flex-1 mt-6">
         <nav>
           <Link
-            className="
+            className={`
+              
               flex
               items-center
               px-4
               py-2
-              text-gray-700
-              bg-gray-200
+              mt-5
+              text-gray-600
+              transition-colors
+              duration-200
+              transform
               rounded-md
-              dark:bg-gray-700 dark:text-gray-200
-            "
+              ${
+                active === ''
+                  ? 'dark:bg-gray-700 dark:text-gray-200 text-gray-700'
+                  : 'dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700 dark:text-gray-400'
+              } 
+            `}
             to="/"
           >
             <AiFillHome />
@@ -48,7 +63,7 @@ export const SideMenu: React.FC = () => {
           </Link>
 
           <Link
-            className="
+            className={`
               flex
               items-center
               px-4
@@ -59,11 +74,12 @@ export const SideMenu: React.FC = () => {
               duration-200
               transform
               rounded-md
-              dark:text-gray-400
-              hover:bg-gray-200
-              dark:hover:bg-gray-700 dark:hover:text-gray-200
-              hover:text-gray-700
-            "
+              ${
+                active === 'directorio'
+                  ? 'dark:bg-gray-700 dark:text-gray-200 text-gray-700'
+                  : 'dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700 dark:text-gray-400'
+              } 
+            `}
             to="/directorio"
           >
             <HiCalendar />
@@ -72,7 +88,7 @@ export const SideMenu: React.FC = () => {
           </Link>
 
           <Link
-            className="
+            className={`
               flex
               items-center
               px-4
@@ -83,11 +99,12 @@ export const SideMenu: React.FC = () => {
               duration-200
               transform
               rounded-md
-              dark:text-gray-400
-              hover:bg-gray-200
-              dark:hover:bg-gray-700 dark:hover:text-gray-200
-              hover:text-gray-700
-            "
+              ${
+                active === 'programacion'
+                  ? 'dark:bg-gray-700 dark:text-gray-200 text-gray-700'
+                  : 'dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700 dark:text-gray-400'
+              } 
+            `}
             to="/"
           >
             <HiCalendar />
@@ -97,7 +114,7 @@ export const SideMenu: React.FC = () => {
 
           <hr className="my-6 dark:border-gray-600" />
 
-          <Link
+          {/* <Link
             className="
               flex
               items-center
@@ -117,7 +134,7 @@ export const SideMenu: React.FC = () => {
             to="/"
           >
             <span className="mx-4 font-medium">Settings</span>
-          </Link>
+          </Link> */}
         </nav>
 
         <div className="flex items-center px-4 -mx-2">
