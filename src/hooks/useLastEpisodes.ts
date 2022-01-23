@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { useContext, useEffect } from 'react';
-import { GlobalContext } from '../context';
+import { useEffect, useState } from 'react';
+import { LastEpisode } from '../interfaces';
 
-export default function useLastEpisodes(): void {
-  const { lastEpisodes, setLastEpisodes, setLoadingLastEpisodes } = useContext(GlobalContext);
+export default function useLastEpisodes(): { lastEpisodes: LastEpisode[]; loadingLastEpisodes: boolean } {
+  const [lastEpisodes, setLastEpisodes] = useState<LastEpisode[]>([]);
+  const [loadingLastEpisodes, setLoadingLastEpisodes] = useState<boolean>(false);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -28,4 +29,6 @@ export default function useLastEpisodes(): void {
       abortController.abort();
     };
   }, [lastEpisodes, setLastEpisodes]);
+
+  return { lastEpisodes, loadingLastEpisodes };
 }

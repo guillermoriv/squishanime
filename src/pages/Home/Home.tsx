@@ -4,9 +4,10 @@ import { LastEpisode } from '../../interfaces';
 import { Link } from 'react-router-dom';
 import { Triangle } from 'react-loader-spinner';
 import { RiAncientGateFill } from 'react-icons/ri';
+import useLastEpisodes from '../../hooks/useLastEpisodes';
 
 export const Home: React.FC = () => {
-  const { lastEpisodes, loadingLastEpisodes } = useContext(GlobalContext);
+  const { lastEpisodes, loadingLastEpisodes } = useLastEpisodes();
 
   return (
     <div className="h-full">
@@ -21,7 +22,7 @@ export const Home: React.FC = () => {
             return (
               <div className="flex justify-center p-2" key={index}>
                 <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                  <Link key={index} to={`/ver/${id}-${episode}`}>
+                  <Link key={index} to={`/anime/${id}`}>
                     <div className="relative">
                       <img
                         className="rounded-t-lg w-full h-56 object-cover"

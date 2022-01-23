@@ -75,6 +75,7 @@ export const Watch: React.FC = () => {
         return (
           <button
             type="button"
+            key={index}
             className="
               px-6
               py-2
