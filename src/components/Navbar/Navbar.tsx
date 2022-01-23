@@ -61,25 +61,32 @@ export const Navbar: React.FC = () => {
   }
 
   return (
-    <nav className="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-800 text-gray-200 shadow-lg navbar navbar-expand-lg navbar-light">
-      <div className="container-fluid w-full flex items-center justify-end px-6">
-        <div className="flex items-center relative">
-          <div className="ml-auto relative">
-            <form onSubmit={(e) => e.preventDefault()}>
-              <div className="flex justify-center">
-                <div className="mb-3 xl:w-96">
-                  <label htmlFor="search-input" className="form-label hidden">
-                    Text input
-                  </label>
-                  <input
-                    type="text"
-                    onFocus={() => {
-                      if (resultSearch.length > 0 || error) {
-                        setCanShow(true);
-                      }
-                    }}
-                    onChange={handleChange}
-                    className="
+    <nav className="py-3 bg-gray-800 text-gray-200 shadow-lg">
+      <div className="container-fluid w-full flex items-center justify-between sm:justify-end px-6">
+        <h2 className="text-2xl block sm:hidden font-medium leading-tight text-white">
+          <Link to="/">
+            Squish
+            <span className="inline-block py-1.5 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded">
+              Anime
+            </span>
+          </Link>
+        </h2>
+        <div className="relative">
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div className="flex justify-center">
+              <div className="mb-3 xl:w-96">
+                <label htmlFor="search-input" className="form-label hidden">
+                  Text input
+                </label>
+                <input
+                  type="text"
+                  onFocus={() => {
+                    if (resultSearch.length > 0 || error) {
+                      setCanShow(true);
+                    }
+                  }}
+                  onChange={handleChange}
+                  className="
                       form-control
                       block
                       w-full
@@ -96,64 +103,63 @@ export const Navbar: React.FC = () => {
                       m-0
                       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                     "
-                    id="search-input"
-                    placeholder="Buscar..."
-                  />
-                </div>
+                  id="search-input"
+                  placeholder="Buscar..."
+                />
               </div>
-            </form>
-            {!isLoading ? (
-              <div
-                ref={ref}
-                className={`${canShow ? 'flex' : 'hidden'} justify-center absolute w-96 top-13 right-2 z-10`}
-              >
-                <ul className="rounded-lg border bg-white w-96 text-gray-900 h-52 overflow-auto">
-                  {resultSearch.map((item: Search, index: number) => {
-                    return (
-                      <li className="px-6 py-2 border-b border-gray-200 w-full" key={index}>
-                        <Link to={`../anime/${item.id}`} className="flex justify-between">
-                          <div className="flex flex-col w-52">
-                            <span>{item.title}</span>
-                            {item.type.toLowerCase() === 'anime' ? (
-                              <span className="bg-green-500 text-xs p-1 rounded-lg text-white w-16 text-center">
-                                {item.type}
-                              </span>
-                            ) : (
-                              <span className="bg-pink-600 text-xs p-1 rounded-lg text-white w-16 text-center">
-                                {item.type}
-                              </span>
-                            )}
-                          </div>
-                          <img
-                            src={
-                              item.image !== null
-                                ? item.image
-                                : 'https://storage.googleapis.com/squishanime_api/images/not_found.jpg'
-                            }
-                            className="rounded-lg h-14 shadow-lg"
-                          />
-                        </Link>
-                      </li>
-                    );
-                  })}
-                  {error && (
-                    <li className="px-6 py-2 border-b border-gray-200 w-full">No fueron encontrado resultados...</li>
-                  )}
-                </ul>
+            </div>
+          </form>
+          {!isLoading ? (
+            <div
+              ref={ref}
+              className={`${canShow ? 'flex' : 'hidden'} justify-center absolute w-96 top-13 right-2 z-10`}
+            >
+              <ul className="rounded-lg border bg-white w-96 text-gray-900 h-52 overflow-auto">
+                {resultSearch.map((item: Search, index: number) => {
+                  return (
+                    <li className="px-6 py-2 border-b border-gray-200 w-full" key={index}>
+                      <Link to={`../anime/${item.id}`} className="flex justify-between">
+                        <div className="flex flex-col w-52">
+                          <span>{item.title}</span>
+                          {item.type.toLowerCase() === 'anime' ? (
+                            <span className="bg-green-500 text-xs p-1 rounded-lg text-white w-16 text-center">
+                              {item.type}
+                            </span>
+                          ) : (
+                            <span className="bg-pink-600 text-xs p-1 rounded-lg text-white w-16 text-center">
+                              {item.type}
+                            </span>
+                          )}
+                        </div>
+                        <img
+                          src={
+                            item.image !== null
+                              ? item.image
+                              : 'https://storage.googleapis.com/squishanime_api/images/not_found.jpg'
+                          }
+                          className="rounded-lg h-14 shadow-lg"
+                        />
+                      </Link>
+                    </li>
+                  );
+                })}
+                {error && (
+                  <li className="px-6 py-2 border-b border-gray-200 w-full">No fueron encontrado resultados...</li>
+                )}
+              </ul>
+            </div>
+          ) : (
+            <div
+              ref={ref}
+              className={`absolute bg-white p-4 z-10 ${
+                canShow ? 'block' : 'hidden'
+              } w-96 rounded-md overflow-auto top-13 right-2`}
+            >
+              <div className="flex justify-center">
+                <Triangle color="#000000" height={80} width={80} />
               </div>
-            ) : (
-              <div
-                ref={ref}
-                className={`absolute bg-white p-4 z-10 ${
-                  canShow ? 'block' : 'hidden'
-                } w-96 rounded-md overflow-auto top-13 right-2`}
-              >
-                <div className="flex justify-center">
-                  <Triangle color="#000000" height={80} width={80} />
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </nav>
