@@ -113,9 +113,8 @@ export const Navbar: React.FC = () => {
             ></path>
           </svg>
         </button>
-        <div className="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent">
-          <Link
-            className="
+        <Link
+          className="
               flex
               sm:hidden
               items-center
@@ -126,15 +125,16 @@ export const Navbar: React.FC = () => {
               lg:mt-0
               mr-1
             "
-            to="/"
-          >
-            <h2 className="text-2xl font-medium leading-tight text-white">
-              Squish
-              <span className="inline-block py-1.5 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded">
-                Anime
-              </span>
-            </h2>
-          </Link>
+          to="/"
+        >
+          <h2 className="text-2xl font-medium leading-tight text-white">
+            Squish
+            <span className="inline-block py-1.5 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded">
+              Anime
+            </span>
+          </h2>
+        </Link>
+        <div className="collapse navbar-collapse items-center w-full" id="navbarSupportedContent">
           <ul className="navbar-nav flex flex-col sm:hidden pl-0 list-style-none mr-auto">
             <li className="nav-item p-2">
               <Link className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to="/">
@@ -152,14 +152,14 @@ export const Navbar: React.FC = () => {
               </Link>
             </li>
           </ul>
-          <div className="relative flex w-full">
-            <form onSubmit={(e) => e.preventDefault()} className="w-full">
+          <div className="relative w-full">
+            <form onSubmit={(e) => e.preventDefault()}>
               <div className="flex justify-end">
                 <div className="mb-3 w-96 flex-grow lg:flex-grow-0 ">
                   <label htmlFor="search-input" className="form-label hidden">
                     Text input
                   </label>
-                  <div className="relative w-full">
+                  <div className="relative">
                     <input
                       type="text"
                       onFocus={() => {
