@@ -9,7 +9,7 @@ export const Anime: React.FC = () => {
   const [filter, setFilter] = useState<boolean>(false);
   const { id } = useParams();
   const { information, isLoading } = useMoreInfo(id!);
-  const { list } = useEpisodes(id!);
+  const { list, isListLoading } = useEpisodes(id!);
 
   function RenderAnime(filter: boolean) {
     if (filter) {
@@ -82,14 +82,22 @@ export const Anime: React.FC = () => {
                     id="flexSwitchCheckChecked"
                   />
                   <label className="form-check-label inline-block text-white" htmlFor="flexSwitchCheckChecked">
-                    {filter && <span>Ordenar de mayor a menor</span>}
-                    {!filter && <span>Ordenar de menor a mayor</span>}
+                    {filter && <span className="hidden sm:inline">Ordenar de mayor a menor</span>}
+                    {!filter && <span className="hidden sm:inline">Ordenar de menor a mayor</span>}
                   </label>
                 </div>
               </div>
             </div>
 
-            <ul>{RenderAnime(filter)}</ul>
+            <ul>
+              {!isListLoading ? (
+                RenderAnime(filter)
+              ) : (
+                <li className="justify-center flex">
+                  <Triangle color="#FFFFFF" height={80} width={80} />
+                </li>
+              )}
+            </ul>
           </div>
         </div>
       ) : (

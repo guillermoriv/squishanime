@@ -6,7 +6,7 @@ export interface EpisodeList {
   id: string;
 }
 
-export default function useEpisodes(id: string): { list: EpisodeList[]; isLoading: boolean } {
+export default function useEpisodes(id: string): { list: EpisodeList[]; isListLoading: boolean } {
   const [list, setList] = useState<EpisodeList[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -21,5 +21,5 @@ export default function useEpisodes(id: string): { list: EpisodeList[]; isLoadin
     fetchEpisodes();
   }, [id]);
 
-  return { isLoading, list };
+  return { isListLoading: isLoading, list };
 }
