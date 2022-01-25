@@ -34,7 +34,7 @@ export const Anime: React.FC = () => {
       {!isLoading ? (
         <div className="text-white flex flex-col p-2">
           <div className="flex flex-col lg:flex-row">
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 mb-5 sm:mb-0">
               <img src={information.poster} alt={information.title} className="rounded-md w-full shadow-lg" />
               <div className="text-center">
                 {information.status === 'Finalizado' ? (
@@ -51,10 +51,10 @@ export const Anime: React.FC = () => {
             <div className="ml-3 flex-grow">
               <div className="text-3xl font-bold">{information.title}</div>
               <p className="my-5">{information.synopsis}</p>
-              <ul className="flex mt-3">
+              <ul className="flex mt-3 items-center overflow-auto">
                 {information.genres.map((item: string, index: number) => {
                   return (
-                    <li key={index} className="text-center p-2 text-xs mr-1 rounded-2xl shadow-md bg-slate-800">
+                    <li key={index} className="text-center p-3 text-xs mr-1 rounded-2xl shadow-md bg-slate-800">
                       {item}
                     </li>
                   );
@@ -88,7 +88,6 @@ export const Anime: React.FC = () => {
                 </div>
               </div>
             </div>
-
             <ul>
               {!isListLoading ? (
                 RenderAnime(filter)

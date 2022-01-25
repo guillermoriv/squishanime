@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { HiCalendar } from 'react-icons/hi';
+import { BsBookHalf, BsFillCalendarDateFill } from 'react-icons/bs';
 
 export const SideMenu: React.FC = () => {
   const [active, setActive] = useState<string>('');
@@ -82,8 +83,7 @@ export const SideMenu: React.FC = () => {
             `}
             to="/directorio"
           >
-            <HiCalendar />
-
+            <BsBookHalf />
             <span className="mx-4 font-medium">Directorio</span>
           </Link>
 
@@ -105,10 +105,9 @@ export const SideMenu: React.FC = () => {
                   : 'dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700 dark:text-gray-400'
               } 
             `}
-            to="/"
+            to="/programacion"
           >
-            <HiCalendar />
-
+            <BsFillCalendarDateFill />
             <span className="mx-4 font-medium">Programacion semanal</span>
           </Link>
 
