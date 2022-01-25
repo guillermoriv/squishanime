@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { FaTheaterMasks } from 'react-icons/fa';
 import { Triangle } from 'react-loader-spinner';
 import { Link, useParams } from 'react-router-dom';
 import { CardDirectory } from '../../components/CardDirectory';
@@ -25,9 +26,13 @@ export const Directory: React.FC = () => {
 
   return (
     <div className="h-full">
+      <div className="text-3xl flex items-center text-white py-2 px-4">
+        <FaTheaterMasks size={50} className="mr-3" />
+        Animes:
+      </div>
       {!loading ? (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
             {directory.map((item: Anime, index: number) => {
               return <CardDirectory key={index} item={item} />;
             })}
