@@ -23,3 +23,21 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(38, 50, 66);
 }
+
+.navbar {
+  z-index: 2;
+}
+
+.close-navbar-toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.close-navbar-toggler.collapsed {
+  z-index: -1;
+}
