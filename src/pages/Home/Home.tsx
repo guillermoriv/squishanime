@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../context';
-import { LastEpisode } from '../../interfaces';
-import { Link } from 'react-router-dom';
-import { Triangle } from 'react-loader-spinner';
+import React from 'react';
 import { RiAncientGateFill } from 'react-icons/ri';
+import { Triangle } from 'react-loader-spinner';
+import { Link } from 'react-router-dom';
+
 import useLastEpisodes from '../../hooks/useLastEpisodes';
+import { LastEpisode } from '../../interfaces';
 
 export const Home: React.FC = () => {
   const { lastEpisodes, loadingLastEpisodes } = useLastEpisodes();

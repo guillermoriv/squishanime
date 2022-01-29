@@ -1,15 +1,17 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Layout } from './components/Layout';
-import { GlobalProvider } from './context';
-import { Home } from './pages/Home';
-import { Watch } from './pages/Watch';
-import 'tw-elements';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import React from 'react';
+import { Route,Routes } from 'react-router-dom';
+
+import { Layout } from './components/Layout';
+import { NotFound } from './components/NotFound';
+import { GlobalProvider } from './context';
 import { Anime } from './pages/Anime';
 import { Directory } from './pages/Directory';
+import { Home } from './pages/Home';
+import { Watch } from './pages/Watch';
 import { Week } from './pages/Week';
-import { NotFound } from './components/NotFound';
+
+import 'tw-elements';
 
 const App: React.FC = () => {
   return (

@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { FiDelete } from 'react-icons/fi';
 import { Triangle } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
-import { FiDelete } from 'react-icons/fi';
+
+import axios from 'axios';
 
 interface Search {
   id: string;
@@ -63,14 +64,14 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <a
+      {/* <a
         className="close-navbar-toggler collapsed"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
-      ></a>
+      ></a> */}
       <nav
         className="
         relative
@@ -177,23 +178,24 @@ export const Navbar: React.FC = () => {
                           }
                         }}
                         onChange={handleChange}
+                        autoComplete="off"
                         className="
-                        form-control
-                        block
-                        w-full
-                        px-3
-                        py-3
-                        text-base
-                        font-normal
-                        text-gray-700
-                        bg-white bg-clip-padding
-                        border border-solid border-gray-300
-                        rounded
-                        transition
-                        ease-in-out
-                        m-0
-                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                      "
+                          form-control
+                          block
+                          w-full
+                          px-3
+                          py-3
+                          text-base
+                          font-normal
+                          text-gray-700
+                          bg-white bg-clip-padding
+                          border border-solid border-gray-300
+                          rounded
+                          transition
+                          ease-in-out
+                          m-0
+                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                        "
                         id="search-input"
                         placeholder="Buscar..."
                       />
@@ -214,39 +216,42 @@ export const Navbar: React.FC = () => {
                   ref={ref}
                   className={`${canShow ? 'flex' : 'hidden'} justify-end w-full absolute right-0 top-16 z-10`}
                 >
-                  <ul className="rounded-lg border bg-white w-96 flex-grow lg:flex-grow-0 text-gray-900 h-52 overflow-auto">
-                    {resultSearch.map((item: Search, index: number) => {
-                      return (
-                        <li className="px-6 py-2 border-b border-gray-200 w-full" key={index}>
-                          <Link to={`../anime/${item.id}`} className="flex justify-between">
-                            <div className="flex flex-col w-52">
-                              <span>{item.title}</span>
-                              {item.type.toLowerCase() === 'anime' ? (
-                                <span className="bg-green-500 text-xs p-1 rounded-lg text-white w-16 text-center">
-                                  {item.type}
-                                </span>
-                              ) : (
-                                <span className="bg-pink-600 text-xs p-1 rounded-lg text-white w-16 text-center">
-                                  {item.type}
-                                </span>
-                              )}
-                            </div>
-                            <img
-                              src={
-                                item.image !== null
-                                  ? item.image
-                                  : 'https://storage.googleapis.com/squishanime_api/images/not_found.jpg'
-                              }
-                              className="rounded-lg h-14 shadow-lg"
-                            />
-                          </Link>
-                        </li>
-                      );
-                    })}
-                    {error && (
+                  {!error ? (
+                    <ul className="rounded-lg border bg-white w-96 flex-grow lg:flex-grow-0 text-gray-900 h-52 overflow-auto">
+                      {resultSearch.map((item: Search, index: number) => {
+                        return (
+                          <li className="px-6 py-2 border-b border-gray-200 w-full" key={index}>
+                            <Link to={`../anime/${item.id}`} className="flex justify-between">
+                              <div className="flex flex-col w-52">
+                                <span>{item.title}</span>
+                                {item.type.toLowerCase() === 'anime' ? (
+                                  <span className="bg-green-500 text-xs p-1 rounded-lg text-white w-16 text-center">
+                                    {item.type}
+                                  </span>
+                                ) : (
+                                  <span className="bg-pink-600 text-xs p-1 rounded-lg text-white w-16 text-center">
+                                    {item.type}
+                                  </span>
+                                )}
+                              </div>
+                              <img
+                                src={
+                                  item.image !== null
+                                    ? item.image
+                                    : 'https://storage.googleapis.com/squishanime_api/images/not_found.jpg'
+                                }
+                                className="rounded-lg h-14 shadow-lg"
+                              />
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <ul className="rounded-lg border bg-white w-96 flex-grow lg:flex-grow-0 text-gray-900 overflow-auto">
                       <li className="px-6 py-2 border-b border-gray-200 w-full">No fueron encontrado resultados...</li>
-                    )}
-                  </ul>
+                    </ul>
+                  )}
                 </div>
               ) : (
                 <div

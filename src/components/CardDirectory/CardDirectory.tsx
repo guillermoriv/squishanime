@@ -1,6 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import axios from 'axios';
+
 import { Anime } from '../../hooks/useDirectory';
 import { range } from '../../utils/utils';
 
@@ -23,7 +25,7 @@ export const CardDirectory: React.FC<{ item: Anime }> = ({ item }: { item: Anime
         } catch (e) {
           setIsLoading(false);
         }
-      }, 10000);
+      }, 5000);
 
       setTimer(timer);
     }

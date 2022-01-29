@@ -1,8 +1,10 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaTheaterMasks } from 'react-icons/fa';
 import { Triangle } from 'react-loader-spinner';
 import { Link, useParams } from 'react-router-dom';
+
+import axios from 'axios';
+
 import { CardDirectory } from '../../components/CardDirectory';
 import useDirectory, { Anime } from '../../hooks/useDirectory';
 import { fetchPageNumbers } from '../../utils/utils';

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
-import { HiCalendar } from 'react-icons/hi';
 import { BsBookHalf, BsFillCalendarDateFill } from 'react-icons/bs';
+import { Link, useLocation } from 'react-router-dom';
 
 export const SideMenu: React.FC = () => {
   const [active, setActive] = useState<string>('');
