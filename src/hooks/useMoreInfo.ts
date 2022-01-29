@@ -9,7 +9,7 @@ interface InfoAnime {
   status: string;
   type: string;
   genres: string[];
-  titleJaponese: string;
+  moreInfo: any;
   source: string;
   totalEpisodes: number;
   rating: number;
@@ -30,7 +30,7 @@ export default function useMoreInfo(id: string): { information: InfoAnime; isLoa
     status: '',
     type: '',
     genres: [],
-    titleJaponese: '',
+    moreInfo: {},
     source: '',
     totalEpisodes: 0,
     rating: 0,

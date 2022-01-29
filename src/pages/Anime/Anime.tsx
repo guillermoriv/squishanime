@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BsCardList } from 'react-icons/bs';
 import { Triangle } from 'react-loader-spinner';
 import { Link, useParams } from 'react-router-dom';
+import useDirectory from '../../hooks/useDirectory';
 
 import useEpisodes, { EpisodeList } from '../../hooks/useEpisodes';
 import useMoreInfo from '../../hooks/useMoreInfo';
@@ -50,7 +51,10 @@ export const Anime: React.FC = () => {
               </div>
             </div>
             <div className="ml-3 flex-grow">
-              <div className="text-3xl font-bold">{information.title}</div>
+              <div className="text-3xl font-bold">
+                <div>{information.title}</div>
+                <div className="opacity-50">{information.moreInfo.titleJapanese}</div>
+              </div>
               <p className="my-5">{information.synopsis}</p>
               <ul className="flex mt-3 items-center overflow-auto">
                 {information.genres.map((item: string, index: number) => {
@@ -61,10 +65,20 @@ export const Anime: React.FC = () => {
                   );
                 })}
               </ul>
-              <div className="my-2">
-                <div className="bg-slate-800 p-2 rounded-md text-center font-bold w-32">
+              <div className="flex items-center">
+                <div className="bg-slate-800 m-2 p-2 rounded-md text-center font-bold w-40">
                   Score: {information.rating}
                 </div>
+                {/* {Object.keys(information.moreInfo).length > 0 && (
+                  <>
+                    <div className="bg-slate-800 m-2 p-2 rounded-md text-center font-bold w-40">
+                      Estudio: <span className="italic">{information.moreInfo.studios[0]}</span>
+                    </div>
+                    <div className="bg-slate-800 m-2 p-2 rounded-md text-center font-bold w-40">
+                      Duración: <span className="italic">{information.moreInfo.duration}</span>
+                    </div>
+                  </>
+                )} */}
               </div>
             </div>
           </div>
