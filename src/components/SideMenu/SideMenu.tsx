@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { BsBookHalf, BsFillCalendarDateFill } from 'react-icons/bs';
+import { AiOutlineClear } from 'react-icons/ai';
 import { Link, useLocation } from 'react-router-dom';
+import { GlobalContext } from '../../context';
+import useGenres, { Genre } from '../../hooks/useGenres';
 
 export const SideMenu: React.FC = () => {
   const [active, setActive] = useState<string>('');
+  const [genre, setGenre] = useState<string>('');
+  const { filter, setFilter } = useContext(GlobalContext);
+  const { genres, loading } = useGenres();
   const location = useLocation();
 
   useEffect(() => {
@@ -24,6 +30,7 @@ export const SideMenu: React.FC = () => {
         bg-white
         border-r
         dark:bg-gray-800 dark:border-gray-600
+        overflow-auto
       "
     >
       <div className="flex space-x-2 justify-center">
@@ -111,28 +118,52 @@ export const SideMenu: React.FC = () => {
           </Link>
 
           <hr className="my-6 dark:border-gray-600" />
-
-          {/* <Link
-            className="
-              flex
-              items-center
-              px-4
-              py-2
-              mt-5
-              text-gray-600
-              transition-colors
-              duration-200
-              transform
-              rounded-md
-              dark:text-gray-400
-              hover:bg-gray-200
-              dark:hover:bg-gray-700 dark:hover:text-gray-200
-              hover:text-gray-700
-            "
-            to="/"
-          >
-            <span className="mx-4 font-medium">Settings</span>
-          </Link> */}
+          {active === 'directorio' && (
+            <div className="text-white my-2">
+              <div className="flex justify-between items-center mb-3">
+                <span>Filtrado por generos:</span>
+                <AiOutlineClear
+                  className="cursor-pointer"
+                  size={20}
+                  onClick={() => {
+                    setFilter({ ...filter, genre: '' });
+                    setGenre('');
+                  }}
+                />
+              </div>
+              {!loading ? (
+                <ul className="flex flex-wrap">
+                  {genres.map((item: Genre, index: number) => {
+                    return (
+                      <li
+                        className={`px-3 py-2 m-1 bg-gray-500 rounded-xl cursor-pointer flex-grow text-center transition-all ${
+                          genre === item.name ? 'bg-gray-600' : ''
+                        }`}
+                        onClick={() => {
+                          setFilter({ ...filter, genre: item.name });
+                          setGenre(item.name);
+                        }}
+                      >
+                        {item.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <ul className="flex">
+                  <li className="flex items-center">
+                    Cargando generos...
+                    <div
+                      className="spinner-border animate-spin inline-block ml-4 w-8 h-8 border-4 rounded-full text-blue-300"
+                      role="status"
+                    >
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </li>
+                </ul>
+              )}
+            </div>
+          )}
         </nav>
 
         <div className="flex items-center px-4 -mx-2">
