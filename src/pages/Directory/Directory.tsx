@@ -1,14 +1,18 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaTheaterMasks } from 'react-icons/fa';
 import { Triangle } from 'react-loader-spinner';
 import { Link, useParams } from 'react-router-dom';
+
+import axios from 'axios';
+
 import { CardDirectory } from '../../components/CardDirectory';
 import useDirectory, { Anime } from '../../hooks/useDirectory';
 import { fetchPageNumbers } from '../../utils/utils';
+import { GlobalContext } from '../../context';
 
 export const Directory: React.FC = () => {
   const { page: actuallyPage } = useParams();
+  const { filter } = useContext(GlobalContext);
   const page = actuallyPage ? actuallyPage : '1';
   const { directory, loading } = useDirectory(page);
   const [numberOfPages, setNumberOfPages] = useState<number>(0);
@@ -34,7 +38,15 @@ export const Directory: React.FC = () => {
         <>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
             {directory.map((item: Anime, index: number) => {
-              return <CardDirectory key={index} item={item} />;
+              if (filter.genre !== '') {
+                if (item.genres.indexOf(filter.genre) !== -1) {
+                  return <CardDirectory key={index} item={item} filter={true} />;
+                } else {
+                  return <CardDirectory key={index} item={item} filter={false} />;
+                }
+              } else {
+                return <CardDirectory key={index} item={item} />;
+              }
             })}
           </div>
           <div className="p-3 flex justify-center w-full">

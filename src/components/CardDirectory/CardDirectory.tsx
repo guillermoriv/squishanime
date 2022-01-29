@@ -1,10 +1,12 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import axios from 'axios';
+
 import { Anime } from '../../hooks/useDirectory';
 import { range } from '../../utils/utils';
 
-export const CardDirectory: React.FC<{ item: Anime }> = ({ item }: { item: Anime }) => {
+export const CardDirectory: React.FC<{ item: Anime; filter?: boolean }> = ({ item, filter = true }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [score, setScore] = useState<string>('');
   const [scoreList, setScoreList] = useState<number[]>([]);
@@ -23,7 +25,7 @@ export const CardDirectory: React.FC<{ item: Anime }> = ({ item }: { item: Anime
         } catch (e) {
           setIsLoading(false);
         }
-      }, 10000);
+      }, 5000);
 
       setTimer(timer);
     }
@@ -40,7 +42,11 @@ export const CardDirectory: React.FC<{ item: Anime }> = ({ item }: { item: Anime
 
   return (
     <Link className="flex justify-center m-3" to={`../anime/${item.id}`}>
-      <div className="flex flex-col md:flex-row md:max-w-xl transition-all hover:shadow-2xl hover:-translate-y-5 rounded-lg bg-white shadow-lg">
+      <div
+        className={`flex flex-col md:flex-row md:max-w-xl transition-all hover:shadow-2xl hover:-translate-y-5 rounded-lg bg-white shadow-lg ${
+          !filter ? 'opacity-40 pointer-events-none' : ''
+        }`}
+      >
         <img
           className="w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
           src={`https://storage.googleapis.com/squishanime_api/images/${item.poster}`}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaTv } from 'react-icons/fa';
+
 import { CardDay } from '../../components/CardDay';
 import { daysOfWeek } from '../../utils/constants';
 

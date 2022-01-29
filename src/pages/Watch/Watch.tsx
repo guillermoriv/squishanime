@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { FaArrowLeft, FaArrowRight, FaHamburger } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
+
+import useMoreInfo from '../../hooks/useMoreInfo';
 import useServers from '../../hooks/useServers';
 import { getAnimeLink, getEpisodeNumber, getNextEpisode, getPreviousEpisode } from '../../utils/utils';
-import { FaArrowRight, FaArrowLeft, FaHamburger } from 'react-icons/fa';
-import useMoreInfo from '../../hooks/useMoreInfo';
 
 export const Watch: React.FC = () => {
   const { id } = useParams();
@@ -110,7 +111,14 @@ export const Watch: React.FC = () => {
           {RenderServers()}
         </div>
       </div>
-      <iframe scrolling="no" src={serverLink} allowFullScreen height={500} className="w-full" />
+      <iframe
+        scrolling="no"
+        src={serverLink}
+        allowFullScreen
+        height={500}
+        className="w-full"
+        title={information.title}
+      />
       <div className="mx-auto flex">
         {getEpisodeNumber(id) > 1 && (
           <Link to={`../ver/${getPreviousEpisode(id)}`} className="p-2">

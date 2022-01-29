@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { BsCardList } from 'react-icons/bs';
 import { Triangle } from 'react-loader-spinner';
 import { Link, useParams } from 'react-router-dom';
-import { BsCardList } from 'react-icons/bs';
+
 import useEpisodes, { EpisodeList } from '../../hooks/useEpisodes';
 import useMoreInfo from '../../hooks/useMoreInfo';
 

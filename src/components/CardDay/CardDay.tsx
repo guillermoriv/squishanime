@@ -1,6 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import axios from 'axios';
+
 import { weekSpanish } from '../../utils/constants';
 
 export const CardDay: React.FC<{ day: string }> = ({ day }: { day: string }) => {

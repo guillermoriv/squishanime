@@ -1,5 +1,6 @@
+import { useEffect,useState } from 'react';
+
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 
 export interface Anime {
   id: string;
