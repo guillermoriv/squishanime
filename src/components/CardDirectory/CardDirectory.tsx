@@ -10,30 +10,22 @@ export const CardDirectory: React.FC<{ item: Anime; filter?: boolean }> = ({ ite
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [score, setScore] = useState<string>('');
   const [scoreList, setScoreList] = useState<number[]>([]);
-  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      const timer = setTimeout(async () => {
-        try {
-          const { data } = await axios.get(`${process.env.REACT_APP_API}getScore/${item.mal_id}`);
-
-          setScore(data.score);
-          setScoreList(range(1, data.score));
-          setIsLoading(false);
-        } catch (e) {
-          setIsLoading(false);
-        }
-      }, 5000);
-
-      setTimer(timer);
-    }
-
-    fetchData();
+    setIsLoading(true);
+    const timer = setTimeout(async () => {
+      try {
+        const { data } = await axios.get(`${process.env.REACT_APP_API}getScore/${item.mal_id}`);
+        setScore(data.score);
+        setScoreList(range(1, data.score));
+        setIsLoading(false);
+      } catch (e) {
+        setIsLoading(false);
+      }
+    }, 5000);
 
     return () => {
-      clearTimeout(timer!);
+      clearTimeout(timer);
       setScore('');
       setScoreList([]);
       setIsLoading(false);

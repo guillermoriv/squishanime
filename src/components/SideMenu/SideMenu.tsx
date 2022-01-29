@@ -123,8 +123,8 @@ export const SideMenu: React.FC = () => {
               <div className="flex justify-between items-center mb-3">
                 <span>Filtrado por generos:</span>
                 <AiOutlineClear
-                  className="cursor-pointer"
-                  size={20}
+                  className="cursor-pointer p-1 hover:bg-white hover:text-black transition-all rounded-lg"
+                  size={30}
                   onClick={() => {
                     setFilter({ ...filter, genre: '' });
                     setGenre('');
@@ -136,13 +136,14 @@ export const SideMenu: React.FC = () => {
                   {genres.map((item: Genre, index: number) => {
                     return (
                       <li
-                        className={`px-3 py-2 m-1 bg-gray-500 rounded-xl cursor-pointer flex-grow text-center transition-all ${
-                          genre === item.name ? 'bg-gray-600' : ''
+                        className={`px-3 py-2 m-1 bg-gray-500  rounded-xl cursor-pointer flex-grow text-center transition-all ${
+                          genre === item.name ? 'bg-gray-600' : 'hover:bg-white hover:text-black'
                         }`}
                         onClick={() => {
                           setFilter({ ...filter, genre: item.name });
                           setGenre(item.name);
                         }}
+                        key={index}
                       >
                         {item.name}
                       </li>
