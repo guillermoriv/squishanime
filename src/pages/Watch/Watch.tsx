@@ -1,6 +1,7 @@
+import { DiscussionEmbed } from 'disqus-react';
 import React, { useEffect, useState } from 'react';
 import { FaArrowLeft, FaArrowRight, FaHamburger } from 'react-icons/fa';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import useMoreInfo from '../../hooks/useMoreInfo';
 import useServers from '../../hooks/useServers';
@@ -8,6 +9,7 @@ import { getAnimeLink, getEpisodeNumber, getNextEpisode, getPreviousEpisode } fr
 
 export const Watch: React.FC = () => {
   const { id } = useParams();
+  const location = useLocation();
   const serverList = useServers(id);
   const { information } = useMoreInfo(getAnimeLink(id));
   const [serverLink, setServerLink] = useState<string>(serverList.defaultServerUrl);
@@ -15,6 +17,14 @@ export const Watch: React.FC = () => {
   useEffect(() => {
     setServerLink(serverList.defaultServerUrl);
   }, [serverList.defaultServerUrl]);
+
+  const disqusShortname = process.env.REACT_APP_SHORTNAME!;
+
+  const disqusConfig = {
+    url: `https://squishanime.net${location.pathname}`,
+    identifier: id,
+    title: `${information.title} ${getEpisodeNumber(id)}`,
+  };
 
   function RenderServers() {
     return serverList.servers.map((item: { url: string; name: string }, index: number) => {
@@ -133,6 +143,9 @@ export const Watch: React.FC = () => {
             <FaArrowRight color="#FFFFFF" className="text-3xl" />
           </Link>
         )}
+      </div>
+      <div className="w-full">
+        <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
       </div>
     </div>
   );
