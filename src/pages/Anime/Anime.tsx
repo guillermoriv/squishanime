@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import { BsCardList } from 'react-icons/bs';
 import { Triangle } from 'react-loader-spinner';
-import { Link, useParams } from 'react-router-dom';
-import useDirectory from '../../hooks/useDirectory';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { DiscussionEmbed } from 'disqus-react';
 
 import useEpisodes, { EpisodeList } from '../../hooks/useEpisodes';
 import useMoreInfo from '../../hooks/useMoreInfo';
 
 export const Anime: React.FC = () => {
   const [filter, setFilter] = useState<boolean>(false);
+  const location = useLocation();
   const { id } = useParams();
   const { information, isLoading } = useMoreInfo(id!);
   const { list, isListLoading } = useEpisodes(id!);
+
+  const disqusShortname = process.env.REACT_APP_SHORTNAME!;
+
+  const disqusConfig = {
+    url: `https://squishanime.net${location.pathname}`,
+    identifier: id,
+    title: information.title,
+  };
 
   function RenderAnime(filter: boolean) {
     if (filter) {
@@ -34,7 +43,7 @@ export const Anime: React.FC = () => {
   return (
     <>
       {!isLoading ? (
-        <div className="text-white flex flex-col p-2">
+        <div className="p-6 text-white flex flex-col">
           <div className="flex flex-col lg:flex-row">
             <div className="flex-shrink-0 mb-5 sm:mb-0">
               <img src={information.poster} alt={information.title} className="rounded-md w-full shadow-lg" />
@@ -112,6 +121,9 @@ export const Anime: React.FC = () => {
                 </li>
               )}
             </ul>
+          </div>
+          <div>
+            <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
           </div>
         </div>
       ) : (
