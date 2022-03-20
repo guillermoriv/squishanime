@@ -1,16 +1,20 @@
 import { DiscussionEmbed } from 'disqus-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaArrowLeft, FaArrowRight, FaHamburger } from 'react-icons/fa';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
 import useMoreInfo from '../../hooks/useMoreInfo';
 import useServers from '../../hooks/useServers';
+// import { useVideoPlayer } from '../../hooks/useVideoPlayer';
 import { getAnimeLink, getEpisodeNumber, getNextEpisode, getPreviousEpisode } from '../../utils/utils';
 
 export const Watch: React.FC = () => {
   const { id } = useParams();
   const location = useLocation();
   const serverList = useServers(id);
+  // const videoElement = useRef<HTMLVideoElement>(null);
+  // const { playerState, togglePlay, handleOnTimeUpdate, handleVideoProgress, handleVideoSpeed, toggleMute } =
+  //   useVideoPlayer(videoElement);
   const { information } = useMoreInfo(getAnimeLink(id));
   const [serverLink, setServerLink] = useState<string>(serverList.defaultServerUrl);
 
@@ -26,63 +30,13 @@ export const Watch: React.FC = () => {
     title: `${information.title} ${getEpisodeNumber(id)}`,
   };
 
+  const notWorkingServers = ['fembed'];
+
   function RenderServers() {
     return serverList.servers.map((item: { url: string; name: string }, index: number) => {
       const { name, url } = item;
 
-      if (index === 0) {
-        return (
-          <button
-            type="button"
-            key={index}
-            className={`
-              rounded-l
-              px-6
-              py-2
-              border-2 border-white
-              text-white
-              font-medium
-              text-xs
-              leading-tight
-              uppercase
-              hover:bg-black hover:bg-opacity-5
-              focus:outline-none focus:ring-0
-              transition
-              duration-150
-              ease-in-out
-            `}
-            onClick={() => setServerLink(url)}
-          >
-            {name}
-          </button>
-        );
-      } else if (index === serverList.servers.length - 1) {
-        return (
-          <button
-            type="button"
-            key={index}
-            className="
-              rounded-r
-              px-6
-              py-2
-              border-t-2 border-b-2 border-r-2 border-white 
-              text-white
-              font-medium
-              text-xs
-              leading-tight
-              uppercase
-              hover:bg-black hover:bg-opacity-5
-              focus:outline-none focus:ring-0
-              transition
-              duration-150
-              ease-in-out
-            "
-            onClick={() => setServerLink(url)}
-          >
-            {name}
-          </button>
-        );
-      } else {
+      if (!notWorkingServers.includes(name)) {
         return (
           <button
             type="button"
@@ -90,7 +44,7 @@ export const Watch: React.FC = () => {
             className="
               px-6
               py-2
-              border-t-2 border-b-2 border-r-2 border-white 
+              border-2 border-white 
               text-white
               font-medium
               text-xs
@@ -121,12 +75,42 @@ export const Watch: React.FC = () => {
           {RenderServers()}
         </div>
       </div>
+      {/* <div className="video-container">
+        <div className="video-wrapper">
+          <video src={serverLink} ref={videoElement} onTimeUpdate={handleOnTimeUpdate} />
+          <div className="controls">
+            <div className="actions">
+              <button onClick={togglePlay}>
+                {!playerState.isPlaying ? <i className="bx bx-play"></i> : <i className="bx bx-pause"></i>}
+              </button>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={playerState.progress}
+              onChange={(e) => handleVideoProgress(e)}
+            />
+            <select className="velocity" value={playerState.speed} onChange={(e) => handleVideoSpeed(e)}>
+              <option value="0.50">0.50x</option>
+              <option value="1">1x</option>
+              <option value="1.25">1.25x</option>
+              <option value="2">2x</option>
+            </select>
+            <button className="mute-btn" onClick={toggleMute}>
+              {!playerState.isMuted ? <i className="bx bxs-volume-full"></i> : <i className="bx bxs-volume-mute"></i>}
+            </button>
+          </div>
+        </div>
+      </div> */}
       <iframe
-        scrolling="no"
+        sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation"
+        width="1000"
+        height="600"
         src={serverLink}
+        frameBorder="0"
+        allow="encrypted-media"
         allowFullScreen
-        height={500}
-        className="w-full"
         title={information.title}
       />
       <div className="mx-auto flex">
