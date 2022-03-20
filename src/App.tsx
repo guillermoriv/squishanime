@@ -1,6 +1,5 @@
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import React from 'react';
-import { Route,Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { Layout } from './components/Layout';
 import { NotFound } from './components/NotFound';

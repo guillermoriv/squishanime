@@ -24,8 +24,8 @@ export default function useServers(id: string | undefined): AnimeServers {
       setServerList({
         id,
         servers: data.servers,
-        defaultServerName: data.servers[0].name,
-        defaultServerUrl: data.servers[0].url,
+        defaultServerName: data.servers[1].name,
+        defaultServerUrl: data.servers[1].url,
       });
     }
 
