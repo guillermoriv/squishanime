@@ -1,0 +1,69 @@
+.trending-product {
+  @apply basis-11/12;
+
+  .trending-item {
+    min-width: 20rem;
+    @apply flex flex-col basis-1/3 flex-1 justify-center p-2;
+  }
+
+  .trending-title {
+    @apply text-3xl flex items-center text-white py-2 px-4 uppercase font-semibold;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .genre {
+    background: rgba(255, 255, 255, 0.2);
+    @apply text-sm py-0.5 px-3 rounded-xl font-bold mx-0.5;
+  }
+}
+
+.top-view {
+  .top-item {
+    min-width: 20rem;
+    @apply flex flex-col basis-1 flex-1 justify-center p-2;
+  }
+
+  .top-title {
+    @apply text-3xl flex items-center text-white py-2 px-4 uppercase font-semibold;
+    font-family: 'Oswald', sans-serif;
+  }
+}
+
+.carousel-button {
+  height: 66px !important;
+  width: 66px !important;
+  background: #0b0c2a !important;
+  line-height: 66px;
+  text-align: center;
+  transform: rotate(45deg);
+  position: relative;
+  z-index: 1;
+  position: absolute !important;
+  left: -33px;
+  top: 50%;
+  margin-top: -47px;
+  opacity: 1 !important;
+
+  &.next {
+    @apply left-auto -right-9;
+  }
+
+  span {
+    transform: rotate(135deg);
+    z-index: 1;
+    @apply block;
+  }
+
+  &:after {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 54px;
+    width: 54px;
+    background: rgba(255, 255, 255, 0.1);
+    content: '';
+    z-index: -1;
+    margin: 0 auto;
+  }
+}

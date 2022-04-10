@@ -1,117 +1,228 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { FaTheaterMasks } from 'react-icons/fa';
+import { FaArrowRight, FaComment, FaEye, FaTheaterMasks } from 'react-icons/fa';
 import { RiAncientGateFill } from 'react-icons/ri';
 import { Triangle } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
-import { CardDirectory } from '../../components/CardDirectory';
-import useDirectory, { Anime } from '../../hooks/useDirectory';
 
+import useDirectory, { Anime } from '../../hooks/useDirectory';
 import useLastEpisodes from '../../hooks/useLastEpisodes';
 import { LastEpisode } from '../../interfaces';
+
+import './index.scss';
 
 export const Home: React.FC = () => {
   const { lastEpisodes, loadingLastEpisodes } = useLastEpisodes();
   const { directory, loading: loadingLastAnimes } = useDirectory('1');
 
   return (
-    <div className="h-full">
-      <Helmet>
-        <title>SquishAnime - tu sitio de anime online!</title>
-        <meta name="description" content="El mejor sitio web para ver anime!, disfrutalo!" />
-
-        <meta itemProp="name" content="SquishAnime - tu sitio de anime online!" />
-        <meta itemProp="description" content="El mejor sitio web para ver anime!, disfrutalo!" />
-        <meta itemProp="image" content="" />
-
-        <meta property="og:url" content="https://squishanime.net" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="SquishAnime - tu sitio de anime online!" />
-        <meta property="og:description" content="El mejor sitio web para ver anime!, disfrutalo!" />
-        <meta property="og:image" content="" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="SquishAnime - tu sitio de anime online!" />
-        <meta name="twitter:description" content="El mejor sitio web para ver anime!, disfrutalo!" />
-        <meta name="twitter:image" content="" />
-      </Helmet>
-      <div>
-        <div className="text-3xl flex items-center text-white py-2 px-4">
-          <RiAncientGateFill size={50} className="mr-3" /> Ultimos episodios:
+    <div>
+      <div id="carouselExampleCaptions" className="carousel slide relative" data-bs-ride="carousel">
+        <div className="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="0"
+            className="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
         </div>
-        {!loadingLastEpisodes ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {lastEpisodes.map((item: LastEpisode, index: number) => {
-              const { title, episode, id } = item;
+        <div className="carousel-inner relative w-full overflow-hidden">
+          <div className="carousel-item active relative float-left w-full">
+            <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg" className="block w-full" alt="..." />
+            <div className="carousel-caption hidden md:block absolute text-center">
+              <h5 className="text-xl">First slide label</h5>
+              <p>Some representative placeholder content for the first slide.</p>
+            </div>
+          </div>
+          <div className="carousel-item relative float-left w-full">
+            <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg" className="block w-full" alt="..." />
+            <div className="carousel-caption hidden md:block absolute text-center">
+              <h5 className="text-xl">Second slide label</h5>
+              <p>Some representative placeholder content for the second slide.</p>
+            </div>
+          </div>
+          <div className="carousel-item relative float-left w-full">
+            <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg" className="block w-full" alt="..." />
+            <div className="carousel-caption hidden md:block absolute text-center">
+              <h5 className="text-xl">Third slide label</h5>
+              <p>Some representative placeholder content for the third slide.</p>
+            </div>
+          </div>
+        </div>
+        <button
+          className="carousel-control-prev carousel-button next"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next"
+        >
+          <span className="font-bold">&lt;</span>
+        </button>
+        <button
+          className="carousel-control-next carousel-button prev"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev"
+        >
+          <span className="font-bold">&gt;</span>
+        </button>
+      </div>
+      <div className="flex flex-col sm:flex-row">
+        <Helmet>
+          <title>SquishAnime - tu sitio de anime online!</title>
+          <meta name="description" content="El mejor sitio web para ver anime!, disfrutalo!" />
 
-              return (
-                <div className="flex justify-center p-2" key={index}>
-                  <div className="rounded-lg shadow-xl transition-all bg-white w-full hover:shadow-2xl hover:-translate-y-5">
-                    <Link key={index} to={`/anime/${id}`}>
-                      <div className="relative">
-                        <img
-                          className="rounded-t-lg w-full h-56 object-cover"
-                          src={
+          <meta itemProp="name" content="SquishAnime - tu sitio de anime online!" />
+          <meta itemProp="description" content="El mejor sitio web para ver anime!, disfrutalo!" />
+          <meta itemProp="image" content="" />
+
+          <meta property="og:url" content="https://squishanime.net" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="SquishAnime - tu sitio de anime online!" />
+          <meta property="og:description" content="El mejor sitio web para ver anime!, disfrutalo!" />
+          <meta property="og:image" content="" />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="SquishAnime - tu sitio de anime online!" />
+          <meta name="twitter:description" content="El mejor sitio web para ver anime!, disfrutalo!" />
+          <meta name="twitter:image" content="" />
+        </Helmet>
+        <div className="trending-product">
+          <div className="flex items-center flex-wrap">
+            <div className="trending-title flex-auto">
+              <RiAncientGateFill size={50} className="mr-3" /> Tendencias
+            </div>
+            <div className="text-white uppercase font-bold tracking-wider flex items-center">
+              <span>Ver todos</span>
+              <FaArrowRight size={17} className="ml-3" />
+            </div>
+          </div>
+          {!loadingLastEpisodes ? (
+            <div className="flex flex-wrap">
+              {lastEpisodes.slice(0, 12).map((item: LastEpisode, index: number) => {
+                const { title, episode, id } = item;
+
+                return (
+                  <div className="trending-item" key={index}>
+                    <Link className="p-2" to={`/ver/${id}-${episode}`}>
+                      <div
+                        className="rounded-lg transition-all w-full h-96"
+                        style={{
+                          backgroundImage: `url("${
                             item.image !== null
-                              ? item.image
+                              ? item.image!
                               : 'https://storage.googleapis.com/squishanime_api/images/not_found.jpg'
-                          }
-                          alt=""
-                        />
-                        <span className="top-3 right-10 absolute text-white bg-stone-700 bg-opacity-70 px-3 py-1 rounded-lg">
-                          {episode}
-                        </span>
+                          }")`,
+                          backgroundRepeat: 'no-repeat',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                        }}
+                      >
+                        <div className="relative">
+                          <span className="top-3 left-5 absolute text-white bg-[#e53637] px-3 py-0.5 rounded-md">
+                            {episode} / ?
+                          </span>
+                        </div>
+                        <div className="relative">
+                          <span className="top-80 left-10 absolute text-white flex items-center bg-[#3d3d3d] px-3 py-0.5 rounded-md">
+                            <FaComment className="mr-1" />
+                            11
+                          </span>
+                        </div>
+                        <div className="relative">
+                          <span className="top-80 right-10 absolute text-white flex items-center bg-[#3d3d3d] px-3 py-0.5 rounded-md">
+                            <FaEye className="mr-1" />
+                            9141
+                          </span>
+                        </div>
                       </div>
                     </Link>
-                    <div className="p-6">
-                      <h5 className="text-gray-900 text-xl font-medium mb-2 truncate">{title}</h5>
-                      <Link
-                        to={`/ver/${id}-${episode}`}
-                        className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                      >
-                        Ver capitulo
-                      </Link>
+                    <div className="p-2">
+                      <ul className="text-white flex">
+                        <li className="genre">Accion</li>
+                        <li className="genre">Shonen</li>
+                      </ul>
+                    </div>
+                    <div className="p-2">
+                      <h5 className="text-white text-xl font-medium mb-2 truncate">{title}</h5>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="flex justify-center items-center text-white p-2 h-full">
-            <Triangle color="#FFFFFF" height={80} width={80} />
-          </div>
-        )}
-      </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="flex justify-center items-center text-white p-2 h-full">
+              <Triangle color="#FFFFFF" height={80} width={80} />
+            </div>
+          )}
+        </div>
 
-      <hr className="my-6 mx-auto border-gray-300 w-1/2" />
+        <div className="flex flex-col basis-1/3">
+          <div className="top-view">
+            <div className="flex items-center flex-wrap">
+              <div className="top-title flex-auto">
+                <FaTheaterMasks size={50} className="mr-3" />
+                Top views
+              </div>
+            </div>
+            {!loadingLastAnimes ? (
+              <div className="flex flex-wrap">
+                {directory.slice(0, 6).map((item: Anime, index: number) => {
+                  const { title, id, poster } = item;
 
-      <div>
-        <div className="text-3xl flex justify-between text-white py-2 px-4">
-          <div className="flex items-center ">
-            <FaTheaterMasks size={50} className="mr-3" />
-            Ultimos animes:
-          </div>
-          <div>
-            <Link
-              to="/directorio"
-              className="p-4 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-            >
-              Ver más
-            </Link>
+                  return (
+                    <div className="top-item" key={index}>
+                      <Link className="p-2" to={`/anime/${id}`}>
+                        <div
+                          className="rounded-lg transition-all w-full h-52"
+                          style={{
+                            backgroundImage: `url("${
+                              poster !== null
+                                ? `https://storage.googleapis.com/squishanime_api/images/${poster}`
+                                : 'https://storage.googleapis.com/squishanime_api/images/not_found.jpg'
+                            }")`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                          }}
+                        >
+                          <div className="relative">
+                            <span className="top-3 right-5 absolute text-white flex items-center bg-[#3d3d3d] px-3 py-0.5 rounded-md">
+                              <FaEye className="mr-1" />
+                              9141
+                            </span>
+                          </div>
+                          <div className="relative">
+                            <h5 className="top-36 w-52 xl:w-full left-5 absolute text-white text-xl font-medium mb-2 truncate">
+                              {title}
+                            </h5>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="flex justify-center items-center text-white p-2 h-full">
+                <Triangle color="#FFFFFF" height={80} width={80} />
+              </div>
+            )}
           </div>
         </div>
-        {!loadingLastAnimes ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
-            {directory.map((item: Anime, index: number) => {
-              return <CardDirectory key={index} item={item} />;
-            })}
-          </div>
-        ) : (
-          <div className="flex justify-center items-center text-white p-2 h-full">
-            <Triangle color="#FFFFFF" height={80} width={80} />
-          </div>
-        )}
       </div>
     </div>
   );

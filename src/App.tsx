@@ -10,6 +10,8 @@ import { Home } from './pages/Home';
 import { Watch } from './pages/Watch';
 import { Week } from './pages/Week';
 
+import 'tw-elements';
+
 const App: React.FC = () => {
   return (
     <GlobalProvider>
