@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
+import './index.scss';
+
 interface Search {
   id: string;
   image: string;
@@ -64,105 +66,37 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* <a
-        className="close-navbar-toggler collapsed"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      ></a> */}
-      <nav
-        className="
-        relative
-        w-full
-        flex flex-wrap
-        items-center
-        justify-between
-        py-4
-      dark:bg-gray-800
-      text-gray-500
-      hover:text-gray-700
-      focus:text-gray-700
-        shadow-lg
-        navbar navbar-expand-lg navbar-light
-      "
-      >
-        <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
-          <button
-            className="
-            navbar-toggler
-            text-gray-500
-            border-0
-            hover:shadow-none hover:no-underline
-            py-2
-            px-2.5
-            bg-transparent
-            focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline
-          "
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="fas"
-              data-icon="bars"
-              className="w-6"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-            >
-              <path
-                fill="currentColor"
-                d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-              ></path>
-            </svg>
-          </button>
-          <Link
-            className="
-              flex
-              sm:hidden
-              items-center
-              text-gray-900
-              hover:text-gray-900
-              focus:text-gray-900
-              mt-2
-              lg:mt-0
-              mr-1
-            "
-            to="/"
-          >
-            <h2 className="text-2xl font-medium leading-tight text-white">
-              Squish
-              <span className="inline-block py-1.5 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded">
-                Anime
-              </span>
-            </h2>
-          </Link>
-          <div className="collapse navbar-collapse items-center w-full" id="navbarSupportedContent">
-            <ul className="navbar-nav flex flex-col sm:hidden pl-0 list-style-none mr-auto">
-              <li className="nav-item p-2">
-                <Link className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to="/">
-                  Inicio
-                </Link>
-              </li>
-              <li className="nav-item p-2">
-                <Link className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to="/directorio">
-                  Directorio
-                </Link>
-              </li>
-              <li className="nav-item p-2">
-                <Link className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to="/programacion">
-                  Programación semanal
-                </Link>
-              </li>
-            </ul>
-            <div className="relative w-full">
+      <header className="header">
+        <div className="container w-full px-4 mx-auto">
+          <div className="flex items-center">
+            <Link className="flex items-center" to="/">
+              <h2 className="text-2xl font-medium leading-tight text-white">
+                Squish
+                <span className="inline-block py-1.5 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded">
+                  Anime
+                </span>
+              </h2>
+            </Link>
+            <div className="hidden lg:block flex-auto items-center text-center">
+              <ul>
+                <li className="header-item">
+                  <Link className="text-gray-300 hover:text-gray-400" to="/">
+                    Inicio
+                  </Link>
+                </li>
+                <li className="header-item">
+                  <Link className="text-gray-300 hover:text-gray-400" to="/directorio">
+                    Directorio
+                  </Link>
+                </li>
+                <li className="header-item">
+                  <Link className="text-gray-300 hover:text-gray-400" to="/programacion">
+                    Programación semanal
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="hidden lg:block relative">
               <form onSubmit={(e) => e.preventDefault()}>
                 <div className="flex justify-end">
                   <div className="mb-3 w-96 flex-grow lg:flex-grow-0 ">
@@ -266,7 +200,7 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
         </div>
-      </nav>
+      </header>
     </>
   );
 };
