@@ -29,6 +29,56 @@
   }
 }
 
+.watch-caption {
+  @apply bottom-14 left-14 pt-5 pb-5 hidden md:block absolute text-center;
+
+  &__text-genre {
+    font-size: 13px;
+    color: #e53637;
+    background: #ffffff;
+    padding: 5px 14px 3px;
+    display: inline-block;
+  }
+
+  &__text-title {
+    color: #ffffff;
+    font-size: 42px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    line-height: 52px;
+    margin-top: 35px;
+    margin-bottom: 8px;
+  }
+
+  &__text-desc {
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+
+  &__button {
+    font-size: 13px;
+    color: #ffffff;
+    background: #e53637;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    border-radius: 4px 0 0 4px;
+    margin-right: 1px;
+
+    &-icon {
+      font-size: 20px;
+      display: inline-block;
+      background: #e53637;
+      padding: 11px 5px 16px 8px;
+      color: #ffffff;
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
 .carousel-button {
   height: 66px !important;
   width: 66px !important;

@@ -43,23 +43,38 @@ export const Home: React.FC = () => {
         <div className="carousel-inner relative w-full overflow-hidden">
           <div className="carousel-item active relative float-left w-full">
             <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg" className="block w-full" alt="..." />
-            <div className="carousel-caption hidden md:block absolute text-center">
-              <h5 className="text-xl">First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
+            <div className="watch-caption">
+              <div className="watch-caption__text-genre">Genre</div>
+              <h2 className="watch-caption__text-title">title</h2>
+              <p className="watch-caption__text-desc">description</p>
+              <a>
+                <span className="watch-caption__button">watch</span>
+                <span className="watch-caption__button-icon">&gt;</span>
+              </a>
             </div>
           </div>
           <div className="carousel-item relative float-left w-full">
             <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg" className="block w-full" alt="..." />
-            <div className="carousel-caption hidden md:block absolute text-center">
-              <h5 className="text-xl">Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
+            <div className="watch-caption">
+              <div className="watch-caption__text-genre">Genre</div>
+              <h2 className="watch-caption__text-title">title</h2>
+              <p className="watch-caption__text-desc">description</p>
+              <a>
+                <span className="watch-caption__button">watch</span>
+                <span className="watch-caption__button-icon">&gt;</span>
+              </a>
             </div>
           </div>
           <div className="carousel-item relative float-left w-full">
             <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg" className="block w-full" alt="..." />
-            <div className="carousel-caption hidden md:block absolute text-center">
-              <h5 className="text-xl">Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p>
+            <div className="watch-caption">
+              <div className="watch-caption__text-genre">Genre</div>
+              <h2 className="watch-caption__text-title">title</h2>
+              <p className="watch-caption__text-desc">description</p>
+              <a>
+                <span className="watch-caption__button">watch</span>
+                <span className="watch-caption__button-icon">&gt;</span>
+              </a>
             </div>
           </div>
         </div>
