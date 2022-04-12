@@ -120,7 +120,7 @@ export const Home: React.FC = () => {
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row">
+      <div className="flex flex-col xl:flex-row">
         <div className="trending-product">
           <div className="flex items-center flex-wrap">
             <div className="trending-title flex-auto">
