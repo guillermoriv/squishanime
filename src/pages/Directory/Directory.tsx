@@ -30,23 +30,11 @@ export const Directory: React.FC = () => {
 
   return (
     <div className="h-full">
-      <div className="text-3xl flex items-center text-white py-2 px-4">
-        <FaTheaterMasks size={50} className="mr-3" />
-        Animes:
-      </div>
       {!loading ? (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="flex flex-wrap">
             {directory.map((item: Anime, index: number) => {
-              if (filter.genre !== '') {
-                if (item.genres.indexOf(filter.genre) !== -1) {
-                  return <CardDirectory key={index} item={item} filter={true} />;
-                } else {
-                  return <CardDirectory key={index} item={item} filter={false} />;
-                }
-              } else {
-                return <CardDirectory key={index} item={item} />;
-              }
+              return <CardDirectory key={index} item={item} />;
             })}
           </div>
           <div className="p-3 flex justify-center w-full">
