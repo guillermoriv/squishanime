@@ -1,0 +1,18 @@
+.header {
+  background: #070720;
+  @apply relative
+        w-full
+        flex flex-wrap
+        items-center
+        justify-between
+        py-4
+        shadow-lg;
+
+  .header-item {
+    @apply p-2 inline-block text-sm font-bold transition-all;
+  }
+
+  ul li:not(:last-child) {
+    margin-right: 1rem;
+  }
+}
