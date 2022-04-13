@@ -3,4 +3,5 @@ export interface LastEpisode {
   title: string;
   episode: string;
   image: string | null;
+  genres: string[];
 }
