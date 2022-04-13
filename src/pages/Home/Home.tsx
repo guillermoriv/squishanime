@@ -134,7 +134,7 @@ export const Home: React.FC = () => {
           {!loadingLastEpisodes ? (
             <div className="flex flex-wrap">
               {lastEpisodes.slice(0, 12).map((item: LastEpisode, index: number) => {
-                const { title, episode, id } = item;
+                const { title, episode, genres, id } = item;
 
                 return (
                   <div className="trending-item" key={index}>
@@ -173,8 +173,11 @@ export const Home: React.FC = () => {
                     </Link>
                     <div className="p-2">
                       <ul className="text-white flex">
-                        <li className="genre">Accion</li>
-                        <li className="genre">Shonen</li>
+                        {genres.slice(0, 3).map((genre: string, index: number) => (
+                          <li className="genre" key={index}>
+                            {genre}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                     <div className="p-2">
